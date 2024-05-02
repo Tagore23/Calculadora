@@ -6,13 +6,13 @@
     <title>Calculadora</title>
 </head>
 <body>
+    Calculadora PHP
     
     <form>
-        Primeiro número:
+        Número 1:
         <input type="number" name="nro1">
-        Segundo Número:
-        <input type="number" name="nro2">
-        <select name="calcular">
+        
+         <select name="calcular">
             <option value="Soma">Soma</option>
             <option value="Subtração">Subtração</option>
             <option value="Divisão">Divisão</option>
@@ -20,6 +20,9 @@
             <option value="Fatorial">Fatorial</option>
             <option value="Potência">Potencia</option>
         </select>
+        Número 2:
+        <input type="number" name="nro2">
+        <br>
         <input type="submit" value="Calcular"/>
     </form>
     <?php
