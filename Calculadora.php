@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,11 @@
             font-family: Arial, Helvetica, sans-serif;
             font-size: 20px;
             margin: 20px 40px 20px 40px;
-            background-color: grey;
+            background-color: black;
+        }
+
+        div{
+            margin: 0;
         }
 
         #header{
@@ -23,10 +28,10 @@
         }
 
         #numero1txt{
-            background-color: lightblue;
+            background-color: lightgrey;
             border-top-left-radius: 10px;
             border-bottom-left-radius: 10px;
-            padding: 3px;
+            padding: 4px;
             color:black;
             width: 100px;
             margin-right: 0;
@@ -37,67 +42,142 @@
             background-color: white;
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
-            padding: 3px;
+            padding: 2px;
             color: black;
             margin-left: 0;
-            width: 100px;
+            width: 281px;
             float: left;
         }
 
         #operacao{
-            width: 100px;
+            border-radius: 10px;
+            background-color: white;
+            padding: 4px;
+            width: 150px;
             float: left;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        #operacao option{
+            background-color: white;
         }
 
         #numero2txt{
+            padding: 4px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            background-color: lightgrey;
             width: 100px;
             float: left;
+            margin-right: 0;
         }
 
         #input2{
-            width: 100px;
+            padding: 2px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            background-color: white;
+            margin-left: 0;
+            width: 281px;
             float: left;
         }
 
+        .clearfix:after {
+            content:"";
+            display:block;
+            clear:both;
+        }
+
+        #botaoCalculo{
+            margin-right: 5px;
+            margin-bottom: 0;
+            margin-top: 0;
+            padding: 8px;
+            background-color: transparent;
+            border: solid green 3px;
+            border-radius: 10px;
+            color: green;
+        }
+
+        #botaoM{
+            margin-bottom: 0;
+            margin-top: 0;
+            margin-left: 5px;
+            margin-right: 5px;
+            padding: 8px;
+            background-color: transparent;
+            border: solid blue 3px;
+            border-radius: 10px;
+            color: blue;
+        }
+
+        #botaoApagar{
+            margin-bottom: 0;
+            margin-top: 0;
+            margin-left: 5px;
+            padding: 8px;
+            background-color: transparent;
+            border: solid blue 3px;
+            border-radius: 10px;
+            color: blue;
+        }
+
         #historico {
+            background-color: white;
             margin-top: 20px;
+            border-radius: 10px;
             border-top: 2px solid black;
-            padding-top: 10px;
+            padding: 10px;
         }
 
         #historico p {
+            background-color: white;
             margin: 5px 0;
         }
+
+        #resultado{
+            background-color: white;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        #resultado p{
+            background-color: white;
+        }
+
     </style>
 </head>
 <body>
     <div><p id="header">Calculadora PHP</p></div>
     
     <form method="GET" action="">
-        <p id="numero1txt">Número 1:</p>
-        <input type="number" id="input1" name="nro1" value="<?php echo isset($_SESSION['nro1']) ? $_SESSION['nro1'] : ''; ?>">
+
+    <div class="clearfix">
+        <div><p id="numero1txt">Número 1:</p></div>
+        <div><input type="number" id="input1" name="nro1" value="<?php echo isset($_SESSION['nro1']) ? $_SESSION['nro1'] : ''; ?>"></div>
             
-        <select id="operacao" name="calcular">
+        <div><select id="operacao" name="calcular">
             <option value="Soma">Soma</option>
             <option value="Subtração">Subtração</option>
             <option value="Divisão">Divisão</option>
             <option value="Multiplicação">Multiplicação</option>
             <option value="Fatorial">Fatorial</option>
             <option value="Potência">Potência</option>
-        </select>
+        </select></div>
     
-        <p id="numero2txt">Número 2:</p>
-        <input id="input2" type="number" name="nro2" value="<?php echo isset($_SESSION['nro2']) ? $_SESSION['nro2'] : ''; ?>">
-        <br>
-        <input type="submit" value="Calcular"/>
+        <div><p id="numero2txt">Número 2:</p></div>
+        <div><input id="input2" type="number" name="nro2" value="<?php echo isset($_SESSION['nro2']) ? $_SESSION['nro2'] : ''; ?>"></div>
+    </div>
 
-        <input type="submit" name="memoria" value="M"/>
+        <input id="botaoCalculo" type="submit" value="Calcular"/>
 
-        <input type="submit" name="acao" value="Apagar Histórico"/>
+        <input id="botaoM" type="submit" name="memoria" value="M"/>
+
+        <input id="botaoApagar" type="submit" name="acao" value="Apagar Histórico"/>
     </form>
 
-    <?php
-    session_start();
+    <div id="resultado"><?php
 
     function adicionarOperacaoAoHistorico($nro1, $nro2, $calcular, $resultado) {
         if (!isset($_SESSION['historico'])) {
@@ -176,7 +256,7 @@
         adicionarOperacaoAoHistorico($nro1, $nro2, $calcular, $resultado);
         echo "<p>O resultado da operação $calcular é: " . $resultado . "</p>";
     }
-    ?>
+    ?></div>
 
     <div id="historico">
         <?php
